@@ -47,7 +47,7 @@ public class Asteroid : MonoBehaviour {
 			Destroy (collision.gameObject);
 			
 			for(int i = 0; i<3; i++) {
-				GameObject chunk = Instantiate(asteroidPrefab, transform.position, transform.rotation) as GameObject;
+				Instantiate(asteroidPrefab, transform.position, transform.rotation);
 			}
 			
 			Destroy(this.gameObject);

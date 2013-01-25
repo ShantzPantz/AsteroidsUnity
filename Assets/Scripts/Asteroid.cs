@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 
 public class Asteroid : MonoBehaviour {
+	public GameObject asteroidPrefab;
+	
 	public int maxSpeed;
 	public int minSpeed;
 	
@@ -34,8 +36,28 @@ public class Asteroid : MonoBehaviour {
 		transform.localScale += new Vector3(randScale, randScale, randScale);
 	}
 	
+	
+	void OnCollisionEnter(Collision collision) {
+		
+		// Instantiate new child astroids
+		
+		
+		if( collision.gameObject.name == "defaultBullet" )
+		{
+			Destroy (collision.gameObject);
+			
+			for(int i = 0; i<3; i++) {
+				GameObject chunk = Instantiate(asteroidPrefab, transform.position, transform.rotation) as GameObject;
+			}
+			
+			Destroy(this.gameObject);
+		}
+	}
+	
+	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+
 }

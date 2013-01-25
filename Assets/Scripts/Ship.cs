@@ -7,6 +7,9 @@ public class Ship : MonoBehaviour {
 	public float rotationSpeed;
 	public ParticleSystem thrustPS;
 	
+	public int bulletSpeed;
+	public GameObject bulletPrefab;
+	
 	// Use this for initialization
 	void Start () {
 	
@@ -28,7 +31,14 @@ public class Ship : MonoBehaviour {
 		}
 		else{
 			thrustPS.Stop();
-				
+		}
+		
+		if( Input.GetButtonDown("Jump") ){
+			// Create Bullet
+			GameObject bullet = Instantiate(bulletPrefab, transform.Find("Gun").position, transform.rotation) as GameObject;
+			bullet.name = "defaultBullet";
+			Physics.IgnoreCollision(bullet.collider, collider);
+			bullet.rigidbody.AddRelativeForce(Vector3.forward * bulletSpeed);
 		}
 	}
 }
